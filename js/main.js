@@ -4,7 +4,11 @@ import {
 } from "./module/offices.js";
 import { 
     getAllFullNameAndEmailsAndBoss,
-    getBossFullNameAndEmail 
+    getBossFullNameAndEmail,
+    getAllEmployeesNotSalesRepresentatives
 } from "./module/employees.js";
+import {
+    getAllEmployeesSpanishPeople
+} from "./module/clients.js";
 
-console.log(await getBossFullNameAndEmail());
+console.log(await getAllEmployeesSpanishPeople());

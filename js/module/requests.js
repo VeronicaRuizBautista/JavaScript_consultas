@@ -4,7 +4,7 @@ export const getAllStatusRequests= async() =>{
     let data =await res.json();
     let dataUpdate = []
     data.forEach(val=>{
-        if(!dataUpdate.some(st => st === val.status)){
+        if(!dataUpdate.some(st => st.status === val.status)){
             dataUpdate.push({
                 status: val.status
             })

@@ -8,7 +8,8 @@ import {
     getAllEmployeesNotSalesRepresentatives
 } from "./module/employees.js";
 import {
-    getAllEmployeesSpanishPeople
+    getAllEmployeesSpanishPeople,
+    getAllClientFromMadridCodoEMploytesSales11Or30
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -19,9 +20,10 @@ import {
 } from "./module/requests.js";
 import{
     getAllCode_clientData_payment2008,
-    getAllPayments2008WithPaypal
+    getAllPayments2008WithPaypal,
+    getAllpayments
 } from "./module/payments.js";
 import { getAllproductsOrnamentales100 
 } from "./module/product.js";
 
-console.log(await getAllPayments2008WithPaypal());
+console.log(await getAllClientFromMadridCodoEMploytesSales11Or30());

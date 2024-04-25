@@ -5,11 +5,13 @@ import {
 import { 
     getAllFullNameAndEmailsAndBoss,
     getBossFullNameAndEmail,
-    getAllEmployeesNotSalesRepresentatives
+    getAllEmployeesNotSalesRepresentatives,
+    getEmployeeByCode
 } from "./module/employees.js";
 import {
     getAllEmployeesSpanishPeople,
-    getAllClientFromMadridCodoEMploytesSales11Or30
+    getAllClientFromMadridCodoEMploytesSales11Or30,
+    getAllClientqAndSalesRepresentative
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -26,4 +28,4 @@ import{
 import { getAllproductsOrnamentales100 
 } from "./module/product.js";
 
-console.log(await getAllClientFromMadridCodoEMploytesSales11Or30());
+console.log(await getAllClientqAndSalesRepresentative());

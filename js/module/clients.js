@@ -27,3 +27,25 @@ export const getAllClientFromMadridCodoEMploytesSales11Or30= async() =>{
     })
     return dataUpdate
 }
+
+//1.4.5.1 Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas.
+import { 
+    getEmployeeByCode
+} from "./employees.js";
+
+export const getAllClientqAndSalesRepresentative= async() =>{
+    let res=await fetch("http://localhost:5501/clients")
+    let data =await res.json();
+    let dataUpdate = [];
+    let promises = data.map(async (val) => {
+        let p=val.code_employee_sales_manager
+        let [employeescode] =await getEmployeeByCode(p);
+        return{
+            name: val.client_name,
+            salesRepresentative: employeescode
+        }
+
+    })
+    return await Promise.all(promises)
+}
+

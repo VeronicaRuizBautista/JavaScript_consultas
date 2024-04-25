@@ -23,3 +23,17 @@ export const getAllOficceCityAndMovil = async()=>{
     })
     return dataUpdate
 }
+
+export const getCity = async(code)=>{
+    let res = await fetch("http://localhost:5504/offices")
+    let data = await res.json();
+    let dataUpdate = []
+    data.forEach(val=>{
+        if(val.code_office == code){
+            dataUpdate.push({
+                city: val.city
+            })
+        }
+    })
+    return dataUpdate;
+}

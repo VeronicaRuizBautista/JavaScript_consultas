@@ -1,6 +1,7 @@
 import { 
     getAllOficceAndCodeCity, 
-    getAllOficceCityAndMovil 
+    getAllOficceCityAndMovil,
+    getCity
 } from "./module/offices.js";
 import { 
     getAllFullNameAndEmailsAndBoss,
@@ -11,7 +12,11 @@ import {
 import {
     getAllEmployeesSpanishPeople,
     getAllClientFromMadridCodoEMploytesSales11Or30,
-    getAllClientqAndSalesRepresentative
+    getAllClientqAndSalesRepresentative,
+    getAllClientWithPaymentAndSalesRepresentative,
+    getAllClientWithoutPaymentAndSalesRepresentative,
+    getAllClientWithPaymentAndSalesRepresentativeOfficeCity,
+    getAllClientWithoutPaymentAndSalesRepresentativeOfficeCity
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -23,9 +28,10 @@ import {
 import{
     getAllCode_clientData_payment2008,
     getAllPayments2008WithPaypal,
-    getAllpayments
+    getAllpayments,
+    getClientsWithPayment
 } from "./module/payments.js";
 import { getAllproductsOrnamentales100 
 } from "./module/product.js";
 
-console.log(await getAllClientqAndSalesRepresentative());
+console.log(await getAllClientWithPaymentAndSalesRepresentativeOfficeCity());

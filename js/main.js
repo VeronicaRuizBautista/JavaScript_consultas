@@ -1,7 +1,8 @@
 import { 
     getAllOficceAndCodeCity, 
     getAllOficceCityAndMovil,
-    getCity
+    getCity,
+    getAddressOffices
 } from "./module/offices.js";
 import { 
     getAllFullNameAndEmailsAndBoss,
@@ -16,7 +17,8 @@ import {
     getAllClientWithPaymentAndSalesRepresentative,
     getAllClientWithoutPaymentAndSalesRepresentative,
     getAllClientWithPaymentAndSalesRepresentativeOfficeCity,
-    getAllClientWithoutPaymentAndSalesRepresentativeOfficeCity
+    getAllClientWithoutPaymentAndSalesRepresentativeOfficeCity,
+    getClientForCity
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -34,4 +36,4 @@ import{
 import { getAllproductsOrnamentales100 
 } from "./module/product.js";
 
-console.log(await getAllClientWithPaymentAndSalesRepresentativeOfficeCity());
+console.log(await getAddressOffices());

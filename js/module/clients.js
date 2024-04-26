@@ -171,3 +171,17 @@ export const getAllClientWithoutPaymentAndSalesRepresentativeOfficeCity= async()
     })
     return await Promise.all(promises)
 }
+
+export const getClientForCity= async (city="") =>{
+    let res = await fetch("http://localhost:5501/clients")
+    let data = await res.json();
+    let dataUpdate=[];
+    data.forEach(val=>{
+        if(val.city == city){
+            dataUpdate.push({
+                code: val.code_employee_sales_manager
+            })
+        }
+    })
+    return dataUpdate
+}

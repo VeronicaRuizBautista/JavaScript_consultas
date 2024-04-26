@@ -37,3 +37,35 @@ export const getCity = async(code)=>{
     })
     return dataUpdate;
 }
+
+
+import {
+    getClientForCity
+} from "./clients.js";
+import { 
+    getEmployeeByCode
+} from "./employees.js";
+
+//1.4.5.6 Lista la dirección de las oficinas que tengan clientes en Fuenlabrada.
+export const getAddressOffices = async()=>{
+    let res = await fetch("http://localhost:5504/offices")
+    let data = await res.json();
+    let code= await getClientForCity("Fuenlabrada");
+    console.log(code)
+    let codeOffice;
+    let l
+    let dataUpdate=[]
+    for (let key in code) {
+        l= code[key].code
+        console.log(l)
+        codeOffice = await getEmployeeByCode(l);
+        console.log(codeOffice)
+        data.forEach(val=>{
+            if(val.code_office == codeOffice){
+                dataUpdate.push({
+                    address: val.address1,
+                })
+            }
+        })
+    }return dataUpdate;
+}

@@ -38,7 +38,15 @@ import{
 import { 
     getCity
 } from "./offices.js";
-
+import { 
+    getAllRequestsByClientCode
+} from "./requests.js";
+import { 
+    getProductByCodeProduct 
+} from "./product.js";
+import {
+    getCodeProductByCodeRequest
+} from "./request_details.js"
 
 export const getAllClientqAndSalesRepresentative= async() =>{
     let res=await fetch("http://localhost:5501/clients")
@@ -212,6 +220,41 @@ export const getAllClientWithSalesRepresentativeAndCityOffice= async() =>{
                 name: val.client_name,
                 salesRepresentative: name,
                 city:city
+            }
+    })
+    return await Promise.all(promises)
+}
+
+export const getClientBycode= async(code)=>{
+    let res= await fetch(`http://localhost:5501/clients?client_code=${code}`)
+    let data = await res.json();
+    let dataUpdate=[];
+    let name;
+    data.forEach(val=>{
+        name=val.client_name
+    })
+    return name
+}
+
+//1.4.5.11 Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+export const getAllProductByClient= async() =>{
+    let res=await fetch("http://localhost:5501/clients")
+    let data =await res.json();
+    let dataUpdate = [];
+    let codes=[];
+    let products=[];
+    let codeProduct=[];
+    let promises = data.map(async (val) => {
+        codes= await getAllRequestsByClientCode(val.client_code)
+        for (let code of codes){
+            codeProduct= await getCodeProductByCodeRequest(code)
+            for(let c of codeProduct)
+            products= await getProductByCodeProduct(c)
+            console.log(c)
+        }
+            return{
+                client_name: val.client_name,
+                gama_productos:products
             }
     })
     return await Promise.all(promises)

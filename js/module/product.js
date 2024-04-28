@@ -5,3 +5,13 @@ export const getAllproductsOrnamentales100= async() =>{
     let data =await res.json();
     return data;
 }
+
+export const getProductByCodeProduct= async(code) =>{
+    let res=await fetch(`http://localhost:5506/products?code_product=${code}`)
+    let data =await res.json();
+    let dataUpdate=[];
+    data.forEach(val=> {
+        dataUpdate.push(val.gama)
+    });
+    return dataUpdate;
+}

@@ -82,3 +82,36 @@ export const getAllRequestsDeliveredJanuary= async() =>{
     })
     return dataUpdate
 }
+
+
+import {
+    getClientBycode
+} from "./clients.js";
+////1.4.5.10 Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido.
+export const getAllClientRequestNoTime= async() =>{
+    let res=await fetch("http://localhost:5508/requests?status=Entregado")
+    let data =await res.json();
+    let dataUpdate = []
+    let code_client;
+    let client="";
+    let Promises= data.map ( async(val)=>{
+        if(val.date_wait>val.date_delivery){
+            code_client=val.code_client
+            client= await getClientBycode(code_client)
+            console.log("client_name: ",client)
+        }       
+    })
+}
+
+export const getAllRequestsByClientCode= async(code) =>{
+    let res=await fetch("http://localhost:5508/requests")
+    let data =await res.json();
+    let dataUpdate = []
+    let codes=[];
+    data.forEach(val=>{
+        if(val.code_client==code){
+            codes.push(val.code_request)
+        }
+    })
+    return codes
+}

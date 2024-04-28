@@ -77,3 +77,34 @@ export const getAllEmployeesWithBoss = async() =>{
     })
     return await Promise.all(promises)
 }
+
+//1.4.5.9 Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe.
+export const getAllEmployeesWithBossAndHisBoss = async() =>{
+    let res=await fetch("http://localhost:5502/employees")
+    let data =await res.json();
+    let dataUpdate = []
+    let codeboss="";
+    let codeboss_boss="";
+    let boss="";
+    let boss_boss="";
+    let promises = data.map(async (val) => {
+        if(val.code_boss != null){
+            codeboss= await getEmployeeByCode(val.code_boss)
+            boss=codeboss[0]['name'];
+            if (codeboss[0]['code_boss']!=null) {
+                codeboss_boss= await getEmployeeByCode(codeboss[0]['code_boss'])
+                boss_boss=codeboss_boss[0]['name'];
+            } else {
+                boss_boss="No tiene jefe"
+            }
+            
+            return({
+                name: val.name,
+                name_boss: boss,
+                boss_boss:boss_boss
+    
+            })
+        }
+    })
+    return await Promise.all(promises)
+}

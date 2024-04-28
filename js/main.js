@@ -9,7 +9,8 @@ import {
     getBossFullNameAndEmail,
     getAllEmployeesNotSalesRepresentatives,
     getEmployeeByCode,
-    getAllEmployeesWithBoss 
+    getAllEmployeesWithBoss,
+    getAllEmployeesWithBossAndHisBoss
 } from "./module/employees.js";
 import {
     getAllEmployeesSpanishPeople,
@@ -20,14 +21,18 @@ import {
     getAllClientWithPaymentAndSalesRepresentativeOfficeCity,
     getAllClientWithoutPaymentAndSalesRepresentativeOfficeCity,
     getClientForCity,
-    getAllClientWithSalesRepresentativeAndCityOffice
+    getAllClientWithSalesRepresentativeAndCityOffice,
+    getClientBycode,
+    getAllProductByClient
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
     getAllCode_requestDate_deliveryLater,
     getAllCode_requestDate_deliveryBefore,
     getAllRequestsRefused2009,
-    getAllRequestsDeliveredJanuary
+    getAllRequestsDeliveredJanuary,
+    getAllClientRequestNoTime,
+    getAllRequestsByClientCode
 } from "./module/requests.js";
 import{
     getAllCode_clientData_payment2008,
@@ -35,7 +40,12 @@ import{
     getAllpayments,
     getClientsWithPayment
 } from "./module/payments.js";
-import { getAllproductsOrnamentales100 
+import { 
+    getAllproductsOrnamentales100,
+    getProductByCodeProduct 
 } from "./module/product.js";
+import {
+    getCodeProductByCodeRequest
+} from "./module/request_details.js"
 
-console.log(await getAllEmployeesWithBoss ());
+console.log(await getAllProductByClient());

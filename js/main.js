@@ -8,7 +8,8 @@ import {
     getAllFullNameAndEmailsAndBoss,
     getBossFullNameAndEmail,
     getAllEmployeesNotSalesRepresentatives,
-    getEmployeeByCode
+    getEmployeeByCode,
+    getAllEmployeesWithBoss 
 } from "./module/employees.js";
 import {
     getAllEmployeesSpanishPeople,
@@ -18,7 +19,8 @@ import {
     getAllClientWithoutPaymentAndSalesRepresentative,
     getAllClientWithPaymentAndSalesRepresentativeOfficeCity,
     getAllClientWithoutPaymentAndSalesRepresentativeOfficeCity,
-    getClientForCity
+    getClientForCity,
+    getAllClientWithSalesRepresentativeAndCityOffice
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -36,4 +38,4 @@ import{
 import { getAllproductsOrnamentales100 
 } from "./module/product.js";
 
-console.log(await getAddressOffices());
+console.log(await getAllEmployeesWithBoss ());

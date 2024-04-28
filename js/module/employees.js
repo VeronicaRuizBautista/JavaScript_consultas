@@ -55,3 +55,25 @@ export const getEmployeeByCode = async (code = '') => {
     let data = await res.json()
     return data
 }
+
+
+//1.4.5.8 Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
+export const getAllEmployeesWithBoss = async() =>{
+    let res=await fetch("http://localhost:5502/employees")
+    let data =await res.json();
+    let dataUpdate = []
+    let codeboss="";
+    let boss="";
+    let promises = data.map(async (val) => {
+        if(val.code_boss != null){
+            codeboss= await getEmployeeByCode(val.code_boss)
+            boss=codeboss[0]['name'];
+            return({
+                name: val.name,
+                name_boss: boss
+    
+            })
+        }
+    })
+    return await Promise.all(promises)
+}

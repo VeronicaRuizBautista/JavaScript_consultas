@@ -185,3 +185,34 @@ export const getClientForCity= async (city="") =>{
     })
     return dataUpdate
 }
+//1.4.5.7 Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.
+export const getAllClientWithSalesRepresentativeAndCityOffice= async() =>{
+    let res=await fetch("http://localhost:5501/clients")
+    let data =await res.json();
+    let dataUpdate = [];
+    let name="";
+    let codeOffice="";
+    let city="";
+    let citys="";
+    let promises = data.map(async (val) => {
+        let p=val.code_employee_sales_manager
+        let [employeescode] =await getEmployeeByCode(p);
+        for (let key in employeescode) {
+            if (key == "name"){
+                name= employeescode[key]
+            }
+            if(key == "code_office") {
+                codeOffice =employeescode[key]
+                citys= await getCity(codeOffice)
+                city=citys[0]
+            }
+        }
+            return{
+                code: val.client_code,
+                name: val.client_name,
+                salesRepresentative: name,
+                city:city
+            }
+    })
+    return await Promise.all(promises)
+}

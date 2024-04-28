@@ -57,9 +57,7 @@ export const getAddressOffices = async()=>{
     let dataUpdate=[]
     for (let key in code) {
         l= code[key].code
-        console.log(l)
         codeOffice = await getEmployeeByCode(l);
-        console.log(codeOffice)
         data.forEach(val=>{
             if(val.code_office == codeOffice){
                 dataUpdate.push({

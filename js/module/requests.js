@@ -115,3 +115,16 @@ export const getAllRequestsByClientCode= async(code) =>{
     })
     return codes
 }
+
+export const getAllClientWithRequest = async (id) => {
+    let res = await fetch("http://localhost:5508/requests")
+    let data = await res.json();
+    let dataUpdate = [];
+    let validacion = "hola"
+    data.forEach(val=>{
+        if(val.code_client == (id)){
+            validacion=true
+        }
+    })
+    return validacion
+}

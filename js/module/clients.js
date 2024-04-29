@@ -39,7 +39,8 @@ import {
     getCity
 } from "./offices.js";
 import { 
-    getAllRequestsByClientCode
+    getAllRequestsByClientCode,
+    getAllClientWithRequest
 } from "./requests.js";
 import { 
     getProductByCodeProduct 
@@ -277,4 +278,51 @@ export const getAllClientWithoutPayment= async() =>{
     })
     let result = await Promise.all(promises);
     return result.filter(item => item !== undefined);
+}
+
+//2. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido.
+export const getAllClientWithoutRequest= async() =>{
+    let res=await fetch("http://localhost:5501/clients")
+    let data =await res.json();
+    let dataUpdate = [];
+    let name=""
+    let promises = data.map(async (val) => {
+        let validacion= await getAllClientWithRequest(val.client_code)
+        if (validacion == "hola"){
+                return{
+                    code: val.client_code,
+                    name: val.client_name,
+                }
+        }
+    })
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
+}
+
+//3. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido.
+export const getAllClientWithoutPaymentAndRequest= async() =>{
+    let res=await fetch("http://localhost:5501/clients")
+    let data =await res.json();
+    let dataUpdate = [];
+    let name=""
+    let promises = data.map(async (val) => {
+        let validacion= await getClientsWithPayment(val.client_code)
+        if (validacion == "hola"){
+            let validacion2= await getAllClientWithRequest(val.client_code)
+            if (validacion2 == "hola"){
+                    return{
+                        code: val.client_code,
+                        name: val.client_name,
+                    }
+            }
+        }
+    })
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
+}
+
+export const getAllClientsByCodeEmployeeSalesManger = async(code)=>{
+    let res = await fetch(`http://localhost:5501/clients?code_employee_sales_manager=${code}`)
+    let data = await res.json();
+    return data;
 }

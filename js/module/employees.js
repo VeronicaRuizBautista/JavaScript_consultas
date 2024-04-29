@@ -1,3 +1,7 @@
+import {
+    getAllClientsByCodeEmployeeSalesManger
+} from "./clients.js";
+
 // 3. Devuelve un listado con el nombre, apellidos y email de los empleados 
 // cuyo jefe tiene un código de jefe igual a 7.
 export const getAllFullNameAndEmailsAndBoss = async() =>{
@@ -56,7 +60,6 @@ export const getEmployeeByCode = async (code = '') => {
     return data
 }
 
-
 //1.4.5.8 Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes.
 export const getAllEmployeesWithBoss = async() =>{
     let res=await fetch("http://localhost:5502/employees")
@@ -107,4 +110,56 @@ export const getAllEmployeesWithBossAndHisBoss = async() =>{
         }
     })
     return await Promise.all(promises)
+}
+
+//4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.
+export const getAllEmployeesDontHaveOffice = async()=>{
+    let res=await fetch("http://localhost:5502/employees")
+    let data =await res.json();
+    let dataUpdate = [];
+    data.forEach(val=>{
+        if(val.code_office === null) {
+            dataUpdate.push({
+                name_employee: val.name
+            })
+        }
+    })
+    return dataUpdate;
+}
+
+
+//5. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado.
+export const getAllEmployeesWithoutClient = async()=>{
+    let res=await fetch("http://localhost:5502/employees")
+    let data =await res.json();
+    let dataUpdate = [];
+    for(let i=0; i<data.length; i++){
+        let [ employees ] = await getAllClientsByCodeEmployeeSalesManger(data[i].employee_code);
+        if(employees == undefined){
+            dataUpdate.push(data[i]);
+        }
+    }
+    return dataUpdate;
+}
+
+//6. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.
+
+
+
+//7. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado.
+export const getAllEmployeesWithoutClientAndDontHaveOffice = async()=>{
+    let res=await fetch("http://localhost:5502/employees")
+    let data =await res.json();
+    let dataUpdate = [];
+    for(let i=0; i<data.length; i++){
+        let [ employees ] = await getAllClientsByCodeEmployeeSalesManger(data[i].employee_code);
+        if(employees == undefined){
+            data.forEach(val=>{
+                if(val.code_office === null){
+                    dataUpdate.push(data[i]);
+                }
+            })
+        }
+    }
+    return dataUpdate;
 }

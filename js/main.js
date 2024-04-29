@@ -10,7 +10,10 @@ import {
     getAllEmployeesNotSalesRepresentatives,
     getEmployeeByCode,
     getAllEmployeesWithBoss,
-    getAllEmployeesWithBossAndHisBoss
+    getAllEmployeesWithBossAndHisBoss,
+    getAllEmployeesDontHaveOffice,
+    getAllEmployeesWithoutClient,
+    getAllEmployeesWithoutClientAndDontHaveOffice
 } from "./module/employees.js";
 import {
     getAllEmployeesSpanishPeople,
@@ -24,7 +27,10 @@ import {
     getAllClientWithSalesRepresentativeAndCityOffice,
     getClientBycode,
     getAllProductByClient,
-    getAllClientWithoutPayment
+    getAllClientWithoutPayment,
+    getAllClientWithoutRequest,
+    getAllClientWithoutPaymentAndRequest,
+    getAllClientsByCodeEmployeeSalesManger
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -33,7 +39,8 @@ import {
     getAllRequestsRefused2009,
     getAllRequestsDeliveredJanuary,
     getAllClientRequestNoTime,
-    getAllRequestsByClientCode
+    getAllRequestsByClientCode,
+    getAllClientWithRequest
 } from "./module/requests.js";
 import{
     getAllCode_clientData_payment2008,
@@ -43,10 +50,13 @@ import{
 } from "./module/payments.js";
 import { 
     getAllproductsOrnamentales100,
-    getProductByCodeProduct 
+    getProductByCodeProduct,
+    getAllProductsNotRequested,
+    getAllProductsNotRequestedWithInformation
 } from "./module/product.js";
 import {
-    getCodeProductByCodeRequest
+    getCodeProductByCodeRequest,
+    getAllRequestDetailsByCode
 } from "./module/request_details.js"
 
-console.log(await getAllClientWithoutPayment());
+console.log(await getAllProductsNotRequestedWithInformation());

@@ -250,7 +250,6 @@ export const getAllProductByClient= async() =>{
             codeProduct= await getCodeProductByCodeRequest(code)
             for(let c of codeProduct)
             products= await getProductByCodeProduct(c)
-            console.log(c)
         }
             return{
                 client_name: val.client_name,
@@ -258,4 +257,24 @@ export const getAllProductByClient= async() =>{
             }
     })
     return await Promise.all(promises)
+}
+
+//1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
+export const getAllClientWithoutPayment= async() =>{
+    let res=await fetch("http://localhost:5501/clients")
+    let data =await res.json();
+    let dataUpdate = [];
+    let name=""
+    let promises = data.map(async (val) => {
+        let p=val.code_employee_sales_manager
+        let validacion= await getClientsWithPayment(val.client_code)
+        if (validacion == "hola"){
+                return{
+                    code: val.client_code,
+                    name: val.client_name,
+                }
+        }
+    })
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
 }

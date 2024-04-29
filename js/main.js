@@ -23,7 +23,8 @@ import {
     getClientForCity,
     getAllClientWithSalesRepresentativeAndCityOffice,
     getClientBycode,
-    getAllProductByClient
+    getAllProductByClient,
+    getAllClientWithoutPayment
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -48,4 +49,4 @@ import {
     getCodeProductByCodeRequest
 } from "./module/request_details.js"
 
-console.log(await getAllProductByClient());
+console.log(await getAllClientWithoutPayment());

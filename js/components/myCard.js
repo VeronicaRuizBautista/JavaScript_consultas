@@ -1,10 +1,10 @@
 import { 
-    getAllClientsFromSpainAndRepresentative11Or30, 
-    getClientsEmploy 
+    getAllClientsFromSpain, 
+
 } from "../module/clients.js";
-import {
-    getAllEmployNotClients 
-} from "../module/employees.js";
+// import {
+//     getAllEmployNotClients 
+// } from "../module/employees.js";
 
 export class Mycard extends HTMLElement{
     constructor(){
@@ -12,7 +12,7 @@ export class Mycard extends HTMLElement{
         this.attachShadow({mode: "open"});
         this.shadowRoot.innerHTML = /*html*/`
             <link rel="stylesheet" href="../css/myCard.css">  
-        `
+         `
     }
     async getClientsEmployDesign(){
         let data = await getClientsEmploy();
@@ -32,30 +32,31 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
-    async getAllClientsFromSpainAndRepresentative11Or30Design(){
-        let data = await getAllClientsFromSpainAndRepresentative11Or30();
-        data.forEach(val => {
-            let money = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(val.limit_credit);
-            this.shadowRoot.innerHTML += /*html*/`
+    async getAllClientsFromSpainDesign(){
+        console.log(await getAllClientsFromSpain())
+        // let data = await getAllClientsFromSpain();
+        // data.forEach(val => {
+        //     let money = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(val.limit_credit);
+        //     this.shadowRoot.innerHTML += /*html*/`
             
-                <div class="report__card">
-                    <div class="card__title">
-                        <div>${val.client_name} # ${val.client_code}</div>
-                    </div>
-                    <div class="card__body">
-                        <div class="body__marck">
-                            <p><b>Id: </b> ${val.id}</p>
-                            <p><b>Codigo del empleado: </b>${val.code_employee_sales_manager}</p>
-                            <p><b>Contacto: </b>${val.phone} - ${val.fax}</p>
-                            <p><b>Nombre del representante: </b>${val.contact_name} ${val.contact_lastname}</p>
-                            <p><b>Dirrecion: </b>${val.address1} ${(val.address2) ? val.address2 : ""}</p>
-                            <p><b>Ubicacion: </b>${val.country} ${val.region} ${val.city} ${val.postal_code}</p>
-                            <p><b>Total a prestar: </b>${money}</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+        //         <div class="report__card">
+        //             <div class="card__title">
+        //                 <div>${val.client_name} # ${val.client_code}</div>
+        //             </div>
+        //             <div class="card__body">
+        //                 <div class="body__marck">
+        //                     <p><b>Id: </b> ${val.id}</p>
+        //                     <p><b>Codigo del empleado: </b>${val.code_employee_sales_manager}</p>
+        //                     <p><b>Contacto: </b>${val.phone} - ${val.fax}</p>
+        //                     <p><b>Nombre del representante: </b>${val.contact_name} ${val.contact_lastname}</p>
+        //                     <p><b>Dirrecion: </b>${val.address1} ${(val.address2) ? val.address2 : ""}</p>
+        //                     <p><b>Ubicacion: </b>${val.country} ${val.region} ${val.city} ${val.postal_code}</p>
+        //                     <p><b>Total a prestar: </b>${money}</p>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     `;
+        // });
     }
     async getAllEmployNotClientsDesign(){
         let data = await getAllEmployNotClients();
@@ -84,8 +85,8 @@ export class Mycard extends HTMLElement{
         return ["logic"];
     }
     attributeChangedCallback(name, old, now) {
-        if(name=="logic" && now=="client_6") this.getClientsEmployDesign()
-        if(name=="logic" && now=="client_16") this.getAllClientsFromSpainAndRepresentative11Or30Design()
-        if(name=="logic" && now=="employ_12") this.getAllEmployNotClientsDesign()
+        if(name=="logic" && now=="client_6") this.getAllClientsFromSpainDesign()
+        // if(name=="logic" && now=="client_16") this.getAllClientsFromSpainAndRepresentative11Or30Design()
+        // if(name=="logic" && now=="employ_12") this.getAllEmployNotClientsDesign()
     }
 }

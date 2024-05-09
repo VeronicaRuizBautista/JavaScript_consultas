@@ -16,7 +16,7 @@ import {
     getAllEmployeesWithoutClientAndDontHaveOffice
 } from "./module/employees.js";
 import {
-    getAllEmployeesSpanishPeople,
+    getAllClientsFromSpain,
     getAllClientFromMadridCodoEMploytesSales11Or30,
     getAllClientqAndSalesRepresentative,
     getAllClientWithPaymentAndSalesRepresentative,

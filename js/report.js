@@ -1,4 +1,5 @@
 import "./components/clock.js";
+import { updateClock } from "./components/clock.js";
 import { Mycard } from "./components/myCard.js";
 import { Mydetails } from "./components/myDetails.js";
 
@@ -13,7 +14,7 @@ btn.forEach(val =>{
         
         if(e.target.innerHTML=="clients"){
             report__details.innerHTML = /*html*/`
-                <my-details logic="client_6" text="7. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
+                <my-details logic="client_6" text="6. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
                 <my-details logic="client_16" text="16. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30."></my-details>
             `
         }
@@ -30,3 +31,4 @@ let [clients] = report__menu
 clients.click();
 customElements.define("my-details", Mydetails)
 customElements.define("my-card", Mycard)
+customElements.define("my-clock", updateClock)

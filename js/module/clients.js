@@ -7,6 +7,9 @@ export const getAllClientsFromSpain= async() =>{
         if(val.country == "Spain"){
             dataUpdate.push({
                 name: val.client_name,
+                code: val.client_code,
+                id: val.id,
+                country: val.country
             })
         }
     })
@@ -22,6 +25,10 @@ export const getAllClientFromMadridCodoEMploytesSales11Or30= async() =>{
         if(val.code_employee_sales_manager == 11 || val.code_employee_sales_manager == 30){
             dataUpdate.push({
                 name: val.client_name,
+                code: val.client_code,
+                id: val.id,
+                city: val.city,
+                code_employee_sales_manager:val.code_employee_sales_manager,
             })
         }
     })
@@ -58,7 +65,9 @@ export const getAllClientqAndSalesRepresentative= async() =>{
         let [employeescode] =await getEmployeeByCode(p);
         return{
             name: val.client_name,
-            salesRepresentative: employeescode
+            code: val.client_code,
+            id: val.id,
+            salesRepresentative: employeescode.name
         }
 
     })

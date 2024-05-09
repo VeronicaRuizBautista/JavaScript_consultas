@@ -10,8 +10,10 @@ export const getAllFullNameAndEmailsAndBoss = async() =>{
     let dataUpdate = data.map(val=>{
         return {
             name: val.name,
+            code: val.employee_code,
             fullLastname: `${val.lastname1} ${val.lastname2}`,
-            email: val.email.match(/(?<=\[)[^\[\]]+@[^@\[\]]+(?=\])/)[0]
+            email: val.email.match(/(?<=\[)[^\[\]]+@[^@\[\]]+(?=\])/)[0],
+            code_boss:val.code_boss,
         }
     })
     return dataUpdate;

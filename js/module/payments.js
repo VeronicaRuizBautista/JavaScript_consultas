@@ -8,6 +8,7 @@ export const getAllCode_clientData_payment2008= async() =>{
         let date= new Date(val.date_payment);
         if((date).getFullYear() == "2008"){
             dataUpdate.push({
+                id: val.id_transaction,
                 code_client: val.code_client,
             })
         }

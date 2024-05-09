@@ -7,6 +7,22 @@ import {
     getAllFullNameAndEmailsAndBoss,
     getBossFullNameAndEmail,
 } from "../module/employees.js";
+import {
+    getAllOficceAndCodeCity,
+    getAllOficceCityAndMovil
+} from "../module/offices.js";
+import {
+    getAllStatusRequests,
+    getAllCode_requestDate_deliveryLater,
+    getAllCode_requestDate_deliveryBefore,
+    getAllRequestsRefused2009,
+    getAllRequestsDeliveredJanuary,
+} from "../module/requests.js";
+import {
+    getAllCode_clientData_payment2008,
+    getAllPayments2008WithPaypal,
+    getAllpayments,
+} from "../module/payments.js";
 
 export class Mycard extends HTMLElement{
     constructor(){
@@ -109,11 +125,198 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
+    async getAllOficceAndCodeCityDesign(){
+        let data = await getAllOficceAndCodeCity();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Code Office:  ${val.code_office}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>City: </b> ${val.city}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllOficceCityAndMovilDesign(){
+        let data = await getAllOficceCityAndMovil();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Code Office: ${val.code_office}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Country: </b> ${val.country}</p>
+                            <p><b>Movil: </b> ${val.movil}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllStatusRequestsDesign(){
+        let data = await getAllStatusRequests();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Status</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>State: </b> ${val.status}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllCode_clientData_payment2008Design(){
+        let data = await getAllCode_clientData_payment2008();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Id Transaction ${val.id}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Code Client: </b> ${val.code_client}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllCode_requestDate_deliveryLaterDesign(){
+        let data = await getAllCode_requestDate_deliveryLater();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Code Requests ${val.code_request}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Code Client: </b> ${val.code_client}</p>
+                            <p><b>Data wait: </b> ${val.date_wait}</p>
+                            <p><b>Data delivery: </b> ${val.date_delivery}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllCode_requestDate_deliveryBeforeDesign(){
+        let data = await getAllCode_requestDate_deliveryBefore();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Code Requests ${val.code_request}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Code Client: </b> ${val.code_client}</p>
+                            <p><b>Data wait: </b> ${val.date_wait}</p>
+                            <p><b>Data delivery: </b> ${val.date_delivery}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllRequestsRefused2009Design(){
+        let data = await getAllRequestsRefused2009();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Code Requests ${val.code_request}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Id: </b> ${val.id}</p>
+                            <p><b>Code Client: </b> ${val.code_client}</p>
+                            <p><b>Data wait: </b> ${val.date_wait}</p>
+                            <p><b>Data delivery: </b> ${val.date_delivery}</p>
+                            <p><b>Status: </b> ${val.status}</p>
+                            <p><b>Comment: </b> ${val.comment}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllRequestsDeliveredJanuaryDesign(){
+        let data = await getAllRequestsDeliveredJanuary();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Code Requests ${val.code_request}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Id: </b> ${val.id}</p>
+                            <p><b>Code Client: </b> ${val.code_client}</p>
+                            <p><b>Data wait: </b> ${val.date_wait}</p>
+                            <p><b>Data delivery: </b> ${val.date_delivery}</p>
+                            <p><b>Status: </b> ${val.status}</p>
+                            <p><b>Comment: </b> ${val.comment}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllPayments2008WithPaypalDesign(){
+        let data = await getAllPayments2008WithPaypal();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Id Transaction ${val.id_transaction}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Code Client: </b> ${val.code_client}</p>
+                            <p><b>Payment: </b> ${val.payment}</p>
+                            <p><b>Date payment: </b> ${val.date_paymnet}</p>
+                            <p><b>Total: </b> ${val.total}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllpaymentsDesign(){
+        let data = await getAllpayments();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>Payments</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Payment: </b> ${val.payment}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
     async getAllEmployNotClientsDesign(){
         let data = await getAllEmployNotClients();
         data.forEach(val => {
             this.shadowRoot.innerHTML += /*html*/`
-            
                 <div class="report__card">
                     <div class="card__title">
                         <div>${val.name} ${val.lastname1} ${val.lastname2} # ${val.employee_code}</div>
@@ -141,6 +344,16 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="client_1.4.5.1") this.getAllClientqAndSalesRepresentativeDesign()
         if(name=="logic" && now=="employ_3") this.getAllFullNameAndEmailsAndBossDesign()
         if(name=="logic" && now=="employ_4") this.getAllFullNameAndEmailsAndBossDesign()
+        if(name=="logic" && now=="offices_1") this.getAllOficceAndCodeCityDesign()
+        if(name=="logic" && now=="offices_2") this.getAllOficceCityAndMovilDesign()
+        if(name=="logic" && now=="requests_7") this.getAllStatusRequestsDesign()
+        if(name=="logic" && now=="payments_8") this.getAllCode_clientData_payment2008Design()
+        if(name=="logic" && now=="requests_9") this.getAllCode_requestDate_deliveryLaterDesign()
+        if(name=="logic" && now=="requests_10") this.getAllCode_requestDate_deliveryBeforeDesign()
+        if(name=="logic" && now=="requests_11") this.getAllRequestsRefused2009Design()
+        if(name=="logic" && now=="requests_12") this.getAllRequestsDeliveredJanuaryDesign()
+        if(name=="logic" && now=="payments_13") this.getAllPayments2008WithPaypalDesign()
+        if(name=="logic" && now=="payments_14") this.getAllpaymentsDesign()
 
     }
 }

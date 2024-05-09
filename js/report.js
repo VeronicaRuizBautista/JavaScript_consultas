@@ -16,13 +16,16 @@ btn.forEach(val =>{
             report__details.innerHTML = /*html*/`
                 <my-details logic="client_6" text="6. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
                 <my-details logic="client_16" text="16. Devuelve un listado con todos los clientes que sean de la ciudad de Madrid y cuyo representante de ventas tenga el código de empleado 11 o 30."></my-details>
-                <my-details logic="client_1.4.5.1" text="1.4.5.1 Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas."></my-details>
+                <my-details logic="client_17" text="17. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas."></my-details>
+                <my-details logic="client_18" text="18. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details>
+                <my-details logic="client_19" text="19. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
             `
         }
         if(e.target.innerHTML=="employees"){
             report__details.innerHTML = /*html*/`
                 <my-details logic="employ_3" text="3. Devuelve un listado con el nombre, apellidos y email de los empleados cuyo jefe tiene un código de jefe igual a 7."></my-details>
                 <my-details logic="employ_4" text="4. Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa."></my-details>
+                <my-details logic="employ_20" text="20. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes."></my-details>
             
             `;
         }
@@ -46,6 +49,11 @@ btn.forEach(val =>{
                 <my-details logic="payments_8" text="8. Devuelve un listado con el código de cliente de aquellos clientes que realizaron algún pago en 2008."></my-details>
                 <my-details logic="payments_13" text="13. Devuelve un listado con todos los pagos que se realizaron en el año 2008 mediante Paypal. Ordene el resultado de mayor a menor."></my-details>
                 <my-details logic="payments_14" text="14. Devuelve un listado con todas las formas de pago que aparecen en la tabla pago. Tenga en cuenta que no deben aparecer formas de pago repetidas."></my-details>            `;
+        }
+        if(e.target.innerHTML=="product"){
+            report__details.innerHTML = /*html*/`
+                <my-details logic="product_15" text="15. Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock."></my-details>
+                `;
         }
 
     })

@@ -2,10 +2,13 @@ import {
     getAllClientsFromSpain, 
     getAllClientFromMadridCodoEMploytesSales11Or30,
     getAllClientqAndSalesRepresentative,
+    getAllClientWithPaymentAndSalesRepresentative,
+    getAllClientWithoutPaymentAndSalesRepresentative,
 } from "../module/clients.js";
 import {
     getAllFullNameAndEmailsAndBoss,
     getBossFullNameAndEmail,
+    getAllEmployeesWithBoss,
 } from "../module/employees.js";
 import {
     getAllOficceAndCodeCity,
@@ -23,6 +26,9 @@ import {
     getAllPayments2008WithPaypal,
     getAllpayments,
 } from "../module/payments.js";
+import {
+    getAllproductsOrnamentales100,
+} from "../module/product.js";
 
 export class Mycard extends HTMLElement{
     constructor(){
@@ -313,6 +319,77 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
+    async getAllproductsOrnamentales100Design(){
+        let data = await getAllproductsOrnamentales100();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.name} # ${val.code_product}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Gama: </b> ${val.gama}</p>
+                            <p><b>Stock: </b> ${val.stock}</p>
+                            <p><b>Price Sale: </b> ${val.price_sale}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientWithPaymentAndSalesRepresentativeDesign(){
+        let data = await getAllClientWithPaymentAndSalesRepresentative();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.name} # ${val.code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Sales Representative: </b> ${val.salesRepresentative}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientWithoutPaymentAndSalesRepresentativeDesign(){
+        let data = await getAllClientWithoutPaymentAndSalesRepresentative();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.name} # ${val.code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Sales Representative: </b> ${val.salesRepresentative}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllEmployeesWithBossDesign(){
+        let data = await getAllEmployeesWithBoss();
+        data.forEach(val => {
+            console.log(data)
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.name} # ${val.code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Name Boss: </b> ${val.name_boss}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
     async getAllEmployNotClientsDesign(){
         let data = await getAllEmployNotClients();
         data.forEach(val => {
@@ -341,7 +418,7 @@ export class Mycard extends HTMLElement{
     attributeChangedCallback(name, old, now) {
         if(name=="logic" && now=="client_6") this.getAllClientsFromSpainDesign()
         if(name=="logic" && now=="client_16") this.getAllClientsFromSpainAndRepresentative11Or30Design()
-        if(name=="logic" && now=="client_1.4.5.1") this.getAllClientqAndSalesRepresentativeDesign()
+        if(name=="logic" && now=="client_17") this.getAllClientqAndSalesRepresentativeDesign()
         if(name=="logic" && now=="employ_3") this.getAllFullNameAndEmailsAndBossDesign()
         if(name=="logic" && now=="employ_4") this.getAllFullNameAndEmailsAndBossDesign()
         if(name=="logic" && now=="offices_1") this.getAllOficceAndCodeCityDesign()
@@ -354,6 +431,10 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="requests_12") this.getAllRequestsDeliveredJanuaryDesign()
         if(name=="logic" && now=="payments_13") this.getAllPayments2008WithPaypalDesign()
         if(name=="logic" && now=="payments_14") this.getAllpaymentsDesign()
+        if(name=="logic" && now=="product_15") this.getAllproductsOrnamentales100Design()
+        if(name=="logic" && now=="client_18") this.getAllClientWithPaymentAndSalesRepresentativeDesign()
+        if(name=="logic" && now=="client_19") this.getAllClientWithoutPaymentAndSalesRepresentativeDesign()
+        if(name=="logic" && now=="client_20") this.getAllEmployeesWithBossDesign()
 
     }
 }

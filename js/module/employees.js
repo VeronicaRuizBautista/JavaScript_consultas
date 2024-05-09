@@ -75,7 +75,8 @@ export const getAllEmployeesWithBoss = async() =>{
             boss=codeboss[0]['name'];
             return({
                 name: val.name,
-                name_boss: boss
+                name_boss: val.code_boss,
+                code:val.employee_code,
     
             })
         }

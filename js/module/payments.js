@@ -56,9 +56,9 @@ export const getClientsWithPayment = async (id) => {
     let res = await fetch("http://localhost:5505/payments")
     let data = await res.json();
     let dataUpdate = [];
-    let validacion = "hola"
+    let validacion = false
     data.forEach(val=>{
-        if(val.code_client == (id)){
+        if(val.code_client === (id)){
             validacion=true
         }
     })

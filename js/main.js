@@ -59,4 +59,4 @@ import {
     getAllRequestDetailsByCode
 } from "./module/request_details.js"
 
-//console.log(await getAllClientWithoutPaymentAndSalesRepresentative());
+console.log(await  getAllClientWithPaymentAndSalesRepresentative());

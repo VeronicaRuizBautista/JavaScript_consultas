@@ -375,7 +375,6 @@ export class Mycard extends HTMLElement{
     async getAllEmployeesWithBossDesign(){
         let data = await getAllEmployeesWithBoss();
         data.forEach(val => {
-            console.log(data)
             this.shadowRoot.innerHTML += /*html*/`
                 <div class="report__card">
                     <div class="card__title">
@@ -383,7 +382,7 @@ export class Mycard extends HTMLElement{
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b>Name Boss: </b> ${val.name_boss}</p>
+                            <p><b>Code Boss: </b> ${val.code_boss}</p>
                         </div>
                     </div>
                 </div>
@@ -434,7 +433,7 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="product_15") this.getAllproductsOrnamentales100Design()
         if(name=="logic" && now=="client_18") this.getAllClientWithPaymentAndSalesRepresentativeDesign()
         if(name=="logic" && now=="client_19") this.getAllClientWithoutPaymentAndSalesRepresentativeDesign()
-        if(name=="logic" && now=="client_20") this.getAllEmployeesWithBossDesign()
+        if(name=="logic" && now=="employ_20") this.getAllEmployeesWithBossDesign()
 
     }
 }

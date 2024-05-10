@@ -96,8 +96,9 @@ export const getAllClientWithPaymentAndSalesRepresentative = async () => {
                 salesRepresentative: name
             }
         }
-    })
-    return await Promise.all(promises)
+    })  
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
 }
 
 //1.4.5.3 Muestra el nombre de los clientes que no hayan realizado pagos junto con el nombre de sus representantes de ventas.

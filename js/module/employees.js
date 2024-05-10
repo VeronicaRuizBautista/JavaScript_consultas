@@ -75,7 +75,7 @@ export const getAllEmployeesWithBoss = async() =>{
             boss=codeboss[0]['name'];
             return({
                 name: val.name,
-                code_boss: val.code_boss,
+                name_boss: boss,
                 code:val.employee_code,
     
             })
@@ -113,7 +113,8 @@ export const getAllEmployeesWithBossAndHisBoss = async() =>{
             })
         }
     })
-    return await Promise.all(promises)
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
 }
 
 //4. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada.

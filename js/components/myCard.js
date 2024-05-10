@@ -4,11 +4,13 @@ import {
     getAllClientqAndSalesRepresentative,
     getAllClientWithPaymentAndSalesRepresentative,
     getAllClientWithoutPaymentAndSalesRepresentative,
+    getAllProductByClient,
 } from "../module/clients.js";
 import {
     getAllFullNameAndEmailsAndBoss,
     getBossFullNameAndEmail,
     getAllEmployeesWithBoss,
+    getAllEmployeesWithBossAndHisBoss,
 } from "../module/employees.js";
 import {
     getAllOficceAndCodeCity,
@@ -20,6 +22,7 @@ import {
     getAllCode_requestDate_deliveryBefore,
     getAllRequestsRefused2009,
     getAllRequestsDeliveredJanuary,
+    getAllClientRequestNoTime,
 } from "../module/requests.js";
 import {
     getAllCode_clientData_payment2008,
@@ -382,7 +385,60 @@ export class Mycard extends HTMLElement{
                     </div>
                     <div class="card__body">
                         <div class="body__marck">
-                            <p><b>Code Boss: </b> ${val.code_boss}</p>
+                            <p><b>Name Boss: </b> ${val.name_boss}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllEmployeesWithBossAndHisBossDesign(){
+        let data = await getAllEmployeesWithBossAndHisBoss();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.name} # ${val.code}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Name Boss: </b> ${val.name_boss}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllClientRequestNoTimeDesign(){
+        let data = await getAllClientRequestNoTime();
+        console.log(data)
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Date Wait: </b> ${val.date_wait}</p>
+                            <p><b>Date Delivery: </b> ${val.date_delivery}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    async getAllProductByClientDesign(){
+        let data = await getAllProductByClient();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Gama Products: </b> ${val.gama_productos}</p>
                         </div>
                     </div>
                 </div>
@@ -434,6 +490,11 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="client_18") this.getAllClientWithPaymentAndSalesRepresentativeDesign()
         if(name=="logic" && now=="client_19") this.getAllClientWithoutPaymentAndSalesRepresentativeDesign()
         if(name=="logic" && now=="employ_20") this.getAllEmployeesWithBossDesign()
+        if(name=="logic" && now=="employ_21") this.getAllEmployeesWithBossAndHisBossDesign()
+        if(name=="logic" && now=="requests_22") this.getAllClientRequestNoTimeDesign()
+        if(name=="logic" && now=="gama_23") this.getAllProductByClientDesign()
+
+
 
     }
 }

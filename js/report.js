@@ -26,6 +26,7 @@ btn.forEach(val =>{
                 <my-details logic="employ_3" text="3. Devuelve un listado con el nombre, apellidos y email de los empleados cuyo jefe tiene un código de jefe igual a 7."></my-details>
                 <my-details logic="employ_4" text="4. Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa."></my-details>
                 <my-details logic="employ_20" text="20. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes."></my-details>
+                <my-details logic="employ_21" text="21. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe."></my-details>
             
             `;
         }
@@ -42,6 +43,7 @@ btn.forEach(val =>{
                 <my-details logic="requests_10" text="10. Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos cuya fecha de entrega ha sido al menos dos días antes de la fecha esperada."></my-details>
                 <my-details logic="requests_11" text="11. Devuelve un listado de todos los pedidos que fueron **rechazados** en 2009."></my-details>
                 <my-details logic="requests_12" text="12. Devuelve un listado de todos los pedidos que han sido **entregados** en el mes de enero de cualquier año."></my-details>
+                <my-details logic="requests_22" text="22. Devuelve el nombre de los clientes a los que no se les ha entregado a tiempo un pedido."></my-details>
             `;
         }
         if(e.target.innerHTML=="payments"){
@@ -53,6 +55,11 @@ btn.forEach(val =>{
         if(e.target.innerHTML=="product"){
             report__details.innerHTML = /*html*/`
                 <my-details logic="product_15" text="15. Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock."></my-details>
+                `;
+        }
+        if(e.target.innerHTML=="gama"){
+            report__details.innerHTML = /*html*/`
+                <my-details logic="gama_23" text="23. Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente."></my-details>
                 `;
         }
 

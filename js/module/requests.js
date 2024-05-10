@@ -98,9 +98,15 @@ export const getAllClientRequestNoTime= async() =>{
         if(val.date_wait>val.date_delivery){
             code_client=val.code_client
             client= await getClientBycode(code_client)
-            console.log("client_name: ",client)
+            return({
+                client_name:client,
+                date_wait:val.date_wait,
+                date_delivery:val.date_delivery
+            })
         }       
     })
+    let result = await Promise.all(Promises);
+    return result.filter(item => item !== undefined);
 }
 
 export const getAllRequestsByClientCode= async(code) =>{

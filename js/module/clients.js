@@ -254,23 +254,27 @@ export const getClientBycode = async (code) => {
 export const getAllProductByClient = async () => {
     let res = await fetch("http://localhost:5501/clients")
     let data = await res.json();
-    let dataUpdate = [];
-    let codes = [];
-    let products = [];
-    let codeProduct = [];
+    let results = {};
     let promises = data.map(async (val) => {
-        codes = await getAllRequestsByClientCode(val.client_code)
+        let codes = await getAllRequestsByClientCode(val.client_code)
+        let products = new Set();
         for (let code of codes) {
-            codeProduct = await getCodeProductByCodeRequest(code)
-            for (let c of codeProduct)
-                products = await getProductByCodeProduct(c)
+            let codeProduct = await getCodeProductByCodeRequest(code)
+            for (let c of codeProduct) {
+                let product = await getProductByCodeProduct(c);
+                products.add(product);
+            }
         }
-        return {
-            client_name: val.client_name,
-            gama_productos: products
-        }
-    })
-    return await Promise.all(promises)
+        if (products.length>0) {
+            results[val.client_name]={
+                client_name:val.client_name,
+                gama_productos: Array.from(products)
+            }
+        };
+    });
+    
+    await Promise.all(promises);
+    return results;
 }
 
 //1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.

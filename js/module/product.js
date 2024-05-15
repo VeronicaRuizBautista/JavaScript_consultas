@@ -24,17 +24,19 @@ export const getProductByCodeProduct= async(code) =>{
 export const getAllProductsNotRequested = async()=>{
     let res = await fetch("http://localhost:5506/products")
     let data = await res.json();
-    let dataUpdate=new Set()
     let promises = data.map(async (val) => {
         let  requested  = await getAllRequestDetailsByCode(val.code_product);
         
         if(requested==undefined) {
-            dataUpdate.add(val.name)
+            return{
+                name:val.name,
+                code:val.code_product,
+                pedido:"Este producto nunca ah aparecido en un pedido"
+            }
         }
     })
-    await Promise.all(promises);
-    const dataArray = Array.from(dataUpdate);
-    return dataArray;
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
 }
 
 //9. Devuelve un listado de los productos que nunca han aparecido en un pedido. El resultado debe mostrar el nombre, la descripción y la imagen del producto.
@@ -45,13 +47,13 @@ export const getAllProductsNotRequestedWithInformation = async()=>{
     let promises = data.map(async (val) => {
         let  requested  = await getAllRequestDetailsByCode(val.code_product);
         if(requested==undefined) {
-            dataUpdate.add({
+            return{
                 name:val.name,
-                description:val.description,
-            })
+                code:val.code_product,
+                pedido:"Este producto nunca ah aparecido en un pedido"
+            }
         }
     })
-    await Promise.all(promises);
-    const dataArray = Array.from(dataUpdate);
-    return dataArray;
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
 }

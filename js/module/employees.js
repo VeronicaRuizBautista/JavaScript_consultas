@@ -167,6 +167,7 @@ export const getAllEmployeesWithoutClientAndDontHaveOffice = async()=>{
     let res=await fetch("http://localhost:5502/employees")
     let data =await res.json();
     let dataUpdate = [];
+    let dataend =[]
     for(let i=0; i<data.length; i++){
         let [ employees ] = await getAllClientsByCodeEmployeeSalesManger(data[i].employee_code);
         if(employees == undefined){
@@ -177,5 +178,13 @@ export const getAllEmployeesWithoutClientAndDontHaveOffice = async()=>{
             })
         }
     }
-    return dataUpdate;
+    dataUpdate.forEach(val=>{
+        dataend.push({
+            name_employee: val.name,
+            code:val.employee_code,
+            officina_y_clientes: "No tiene clientes asociados"
+        })
+        
+    })
+    return dataend;
 }

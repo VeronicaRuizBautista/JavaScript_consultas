@@ -32,6 +32,7 @@ btn.forEach(val =>{
                 <my-details logic="employ_21" text="21. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe."></my-details>
                 <my-details logic="employ_27" text="27. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada."></my-details>
                 <my-details logic="employ_28" text="28. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado."></my-details>
+                <my-details logic="employ_30" text="30. Devuelve un listado que muestre los empleados que no tienen una oficina asociada y los que no tienen un cliente asociado."></my-details>
 
             `;
         }
@@ -60,6 +61,9 @@ btn.forEach(val =>{
         if(e.target.innerHTML=="product"){
             report__details.innerHTML = /*html*/`
                 <my-details logic="product_15" text="15. Devuelve un listado con todos los productos que pertenecen a la gama Ornamentales y que tienen más de 100 unidades en stock."></my-details>
+                <my-details logic="product_31" text="31. Devuelve un listado de los productos que nunca han aparecido en un pedido."></my-details>
+                <my-details logic="product_32" text="32. Devuelve un listado de los productos que nunca han aparecido en un pedido."></my-details>
+
                 `;
         }
         if(e.target.innerHTML=="gama"){

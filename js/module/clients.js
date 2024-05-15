@@ -254,29 +254,29 @@ export const getClientBycode = async (code) => {
 export const getAllProductByClient = async () => {
     let res = await fetch("http://localhost:5501/clients")
     let data = await res.json();
-    let results = {};
+    let dataUpdate = [];
+    let codes = [];
+    let products = [];
+    let codeProduct = [];
+    let p
     let promises = data.map(async (val) => {
-        let codes = await getAllRequestsByClientCode(val.client_code)
-        let products = new Set();
+        codes = await getAllRequestsByClientCode(val.client_code)
         for (let code of codes) {
-            let codeProduct = await getCodeProductByCodeRequest(code)
-            for (let c of codeProduct) {
-                let product = await getProductByCodeProduct(c);
-                products.add(product);
-            }
+            codeProduct = await getCodeProductByCodeRequest(code)
+            for (let c of codeProduct)
+                p = await getProductByCodeProduct(c)
+                products.push(p)
+                
+                //console.log(p)
         }
-        if (products.length>0) {
-            results[val.client_name]={
-                client_name:val.client_name,
-                gama_productos: Array.from(products)
-            }
-        };
-    });
-    
-    await Promise.all(promises);
-    return results;
-}
-
+        return {
+            client_name: val.client_name,
+            gama_productos: p
+        }
+    })
+    let result = await Promise.all(promises);
+    return result.filter(item => item !== undefined);
+  }
 //1. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago.
 export const getAllClientWithoutPayment = async () => {
     let res = await fetch("http://localhost:5501/clients")
@@ -286,10 +286,11 @@ export const getAllClientWithoutPayment = async () => {
     let promises = data.map(async (val) => {
         let p = val.code_employee_sales_manager
         let validacion = await getClientsWithPayment(val.client_code)
-        if (validacion == "hola") {
+        if (validacion == false) {
             return {
                 code: val.client_code,
                 name: val.client_name,
+                pago:"No a realizado ningun pago"
             }
         }
     })
@@ -309,6 +310,7 @@ export const getAllClientWithoutRequest = async () => {
             return {
                 code: val.client_code,
                 name: val.client_name,
+                pedido:"No ha realizado ningun pedido"
             }
         }
     })
@@ -324,12 +326,13 @@ export const getAllClientWithoutPaymentAndRequest = async () => {
     let name = ""
     let promises = data.map(async (val) => {
         let validacion = await getClientsWithPayment(val.client_code)
-        if (validacion == "hola") {
+        if (validacion == false) {
             let validacion2 = await getAllClientWithRequest(val.client_code)
-            if (validacion2 == "hola") {
+            if (validacion2 == false) {
                 return {
                     code: val.client_code,
                     name: val.client_name,
+                    pago_y_pedido: "No ha realixado ningun pago ni pedido"
                 }
             }
         }

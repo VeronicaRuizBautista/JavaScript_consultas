@@ -19,7 +19,10 @@ btn.forEach(val =>{
                 <my-details logic="client_17" text="17. Obtén un listado con el nombre de cada cliente y el nombre y apellido de su representante de ventas."></my-details>
                 <my-details logic="client_18" text="18. Muestra el nombre de los clientes que hayan realizado pagos junto con el nombre de sus representantes de ventas."></my-details>
                 <my-details logic="client_19" text="19. Devuelve el nombre de los clientes y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante."></my-details>
-            `
+                <my-details logic="client_24" text="24. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago."></my-details>
+                <my-details logic="client_25" text="25. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido."></my-details>
+                <my-details logic="client_26" text="26. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido."></my-details>
+            `  
         }
         if(e.target.innerHTML=="employees"){
             report__details.innerHTML = /*html*/`
@@ -27,7 +30,9 @@ btn.forEach(val =>{
                 <my-details logic="employ_4" text="4. Devuelve el nombre del puesto, nombre, apellidos y email del jefe de la empresa."></my-details>
                 <my-details logic="employ_20" text="20. Devuelve un listado con el nombre de los empleados junto con el nombre de sus jefes."></my-details>
                 <my-details logic="employ_21" text="21. Devuelve un listado que muestre el nombre de cada empleados, el nombre de su jefe y el nombre del jefe de sus jefe."></my-details>
-            
+                <my-details logic="employ_27" text="27. Devuelve un listado que muestre solamente los empleados que no tienen una oficina asociada."></my-details>
+                <my-details logic="employ_28" text="28. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado."></my-details>
+
             `;
         }
         if(e.target.innerHTML=="offices"){

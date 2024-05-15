@@ -125,7 +125,9 @@ export const getAllEmployeesDontHaveOffice = async()=>{
     data.forEach(val=>{
         if(val.code_office === null) {
             dataUpdate.push({
-                name_employee: val.name
+                name_employee: val.name,
+                code:val.employee_code,
+                office:val.code_office,
             })
         }
     })
@@ -138,13 +140,22 @@ export const getAllEmployeesWithoutClient = async()=>{
     let res=await fetch("http://localhost:5502/employees")
     let data =await res.json();
     let dataUpdate = [];
+    let dataend = []
     for(let i=0; i<data.length; i++){
         let [ employees ] = await getAllClientsByCodeEmployeeSalesManger(data[i].employee_code);
         if(employees == undefined){
             dataUpdate.push(data[i]);
         }
     }
-    return dataUpdate;
+    dataUpdate.forEach(val=>{
+        dataend.push({
+            name_employee: val.name,
+            code:val.employee_code,
+            clientes: "No tiene clientes asociados"
+        })
+        
+    })
+    return dataend;
 }
 
 //6. Devuelve un listado que muestre solamente los empleados que no tienen un cliente asociado junto con los datos de la oficina donde trabajan.

@@ -47,13 +47,15 @@ import {
 } from "./offices.js";
 import {
     getAllRequestsByClientCode,
-    getAllClientWithRequest
+    getAllClientWithRequest,
+    getAllRequest
 } from "./requests.js";
 import {
     getProductByCodeProduct
 } from "./product.js";
 import {
-    getCodeProductByCodeRequest
+    getCodeProductByCodeRequest,
+    getAllRequestDetails,
 } from "./request_details.js"
 
 export const getAllClientqAndSalesRepresentative = async () => {
@@ -345,4 +347,90 @@ export const getAllClientsByCodeEmployeeSalesManger = async (code) => {
     let res = await fetch(`http://localhost:5501/clients?code_employee_sales_manager=${code}`)
     let data = await res.json();
     return data;
+}
+
+//11. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago.
+export const getAllCostumersWithGamas = async()=>{
+    let res = await fetch("http://localhost:5501/clients")
+    let clients = await res.json();
+    // Obtenemos un array de todos los nombres de cliente
+    let clientNames = clients.map(client => client.client_name);
+
+    // Filtramos los clientes para mantener solo aquellos cuyos nombres son únicos
+    let uniqueClients = clients.filter((client, index) => {
+        // Comparamos el índice actual con el índice de la primera ocurrencia del nombre del cliente
+        return clientNames.indexOf(client.client_name) === index;
+    });
+
+    let clientCodes = uniqueClients.map(client => client.client_code);
+    let groups = {};
+
+    uniqueClients.forEach((client,i) =>{
+        let code_client = client.client_code;
+        if(!groups[code_client]){
+            groups[code_client] = []
+        }
+    })
+
+
+
+    for (let i = uniqueClients.length - 1; i >= 0; i--) {
+        var {
+            id:id_client,
+            limit_credit,
+            postal_code:postal_code_client,
+            country:country_client,
+            region:region_client,
+            address2:address2_client,
+            address1:address1_client,
+            fax,
+            phone,
+            city,
+            code_employee_sales_manager,
+            ...clientUpdate} = uniqueClients[i]
+            uniqueClients[i] = clientUpdate
+        let code_client = await getAllRequest(uniqueClients[i].client_code);
+        if (code_client.code_client !== undefined) {
+            uniqueClients[i] = {
+                code_client: code_client.code_client,
+                client_name: uniqueClients[i].contact_name,
+                code_requests: code_client.codes_requests
+            }
+        } else {
+            uniqueClients.splice(i, 1);
+        }
+    }
+    var AllCodeRequestsLength = []
+    for(let i = 0; i<uniqueClients.length; i++){
+        AllCodeRequestsLength.push(uniqueClients[i].code_requests)
+    }
+    var nuevo = new Set()
+    for(let i = 0; i<AllCodeRequestsLength.length; i++){
+        for(let j = 0; j<AllCodeRequestsLength[i].length; j++){
+            var requestsDetails = await getAllRequestDetails(AllCodeRequestsLength[i][j])
+            nuevo.add(requestsDetails.product_code)
+            uniqueClients[i]["single_code_request"] = requestsDetails.code_request
+
+            continue
+        }
+        uniqueClients[i]["products"] = [...nuevo]
+        nuevo = new Set()    
+    }
+    var uniqueInitials = new Set();
+    for(let i = 0; i<uniqueClients.length; i++){
+        // Recorrer el array de productos y agregar las iniciales al conjunto
+        uniqueClients[i].products.forEach(subArray => {
+            if(subArray === undefined){
+                return
+            }
+            for(let i of subArray){
+                uniqueInitials.add(i);
+            }
+        
+        });
+    
+        uniqueClients[i].products = [...uniqueInitials];
+    }
+
+    return uniqueClients;
 }

@@ -30,7 +30,8 @@ import {
     getAllClientWithoutPayment,
     getAllClientWithoutRequest,
     getAllClientWithoutPaymentAndRequest,
-    getAllClientsByCodeEmployeeSalesManger
+    getAllClientsByCodeEmployeeSalesManger,
+    getAllCostumersWithGamas,
 } from "./module/clients.js";
 import {
     getAllStatusRequests,
@@ -40,7 +41,8 @@ import {
     getAllRequestsDeliveredJanuary,
     getAllClientRequestNoTime,
     getAllRequestsByClientCode,
-    getAllClientWithRequest
+    getAllClientWithRequest,
+    getAllRequest,
 } from "./module/requests.js";
 import{
     getAllCode_clientData_payment2008,
@@ -56,7 +58,8 @@ import {
 } from "./module/product.js";
 import {
     getCodeProductByCodeRequest,
-    getAllRequestDetailsByCode
+    getAllRequestDetailsByCode,
+    getAllRequestDetails
 } from "./module/request_details.js"
 
-console.log(await  getAllProductsNotRequested());
+console.log(await  getAllCostumersWithGamas());

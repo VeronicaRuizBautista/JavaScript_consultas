@@ -134,3 +134,19 @@ export const getAllClientWithRequest = async (id) => {
     })
     return validacion
 }
+
+export const getAllRequest = async(code) =>{
+    let res = await fetch(`http://localhost:5508/requests?code_client=${code}`)
+    let data = await res.json()
+    let nuevo = {
+        code_client: undefined,
+        codes_requests: []
+    };
+    if (data !== undefined && data.length > 0) {
+        nuevo.code_client = data[0].code_client;
+        for (let i of data) {
+            nuevo.codes_requests.push(i.code_request);
+        }
+    }
+    return nuevo;
+}

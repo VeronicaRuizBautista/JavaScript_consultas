@@ -8,6 +8,7 @@ import {
     getAllClientWithoutPayment,
     getAllClientWithoutRequest,
     getAllClientWithoutPaymentAndRequest,
+    getAllCostumersWithGamas,
 } from "../module/clients.js";
 import {
     getAllFullNameAndEmailsAndBoss,
@@ -589,6 +590,25 @@ export class Mycard extends HTMLElement{
             `;
         });
     }
+
+    async getAllCostumersWithGamasDesign(){
+        let data = await getAllCostumersWithGamas();
+        data.forEach(val => {
+            this.shadowRoot.innerHTML += /*html*/`
+                <div class="report__card">
+                    <div class="card__title">
+                        <div>${val.client_name} # ${val.code_client}</div>
+                    </div>
+                    <div class="card__body">
+                        <div class="body__marck">
+                            <p><b>Single Code Request: </b> ${val.single_code_request}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
     async getAllEmployNotClientsDesign(){
         let data = await getAllEmployNotClients();
         data.forEach(val => {
@@ -645,6 +665,7 @@ export class Mycard extends HTMLElement{
         if(name=="logic" && now=="employ_30") this.getAllEmployeesWithoutClientAndDontHaveOfficeDesign()
         if(name=="logic" && now=="product_31") this.getAllProductsNotRequestedDesign()
         if(name=="logic" && now=="product_32") this.getAllProductsNotRequestedWithInformationDesign()
+        if(name=="logic" && now=="client_34") this.getAllCostumersWithGamasDesign()
 
 
     }

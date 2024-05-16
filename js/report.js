@@ -22,7 +22,9 @@ btn.forEach(val =>{
                 <my-details logic="client_24" text="24. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pago."></my-details>
                 <my-details logic="client_25" text="25. Devuelve un listado que muestre solamente los clientes que no han realizado ningún pedido."></my-details>
                 <my-details logic="client_26" text="26. Devuelve un listado que muestre los clientes que no han realizado ningún pago y los que no han realizado ningún pedido."></my-details>
-            `  
+                <my-details logic="client_34" text="34. Devuelve un listado con los clientes que han realizado algún pedido pero no han realizado ningún pago."></my-details>
+
+                `  
         }
         if(e.target.innerHTML=="employees"){
             report__details.innerHTML = /*html*/`
